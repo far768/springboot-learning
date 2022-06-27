@@ -4,7 +4,9 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+import java.util.Date;
+
+@Document(collection = "tenant")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,7 +14,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @ToString
 public class Tenant {
     @Id
-    String id;
+    String tenantId;
     String name;
     String applicationName;
+    Date createdOn = new Date();
+    Date modifiedOn = new Date();
 }
