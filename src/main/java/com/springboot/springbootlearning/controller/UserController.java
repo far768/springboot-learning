@@ -151,10 +151,10 @@ public class UserController {
 //        return userService.updateByContactMobileNumberOrEmailId(mobileNumber, emailId, user);
 //    }
 //
-//    @PutMapping("/updateFirstNameLastNameById")
-//    public List<User> updateFirstNameLastNameById(String id, @RequestBody User user) {
-//        return userService.updateFirstNameLastNameById(id, user.getFirstName(), user.getLastName());
-//    }
+    @PutMapping("/updateFirstNameLastNameById")
+    public boolean updateFirstNameLastNameById(@RequestParam String id, @RequestBody User user) {
+        return userService.updateFirstNameLastNameById(id, user.getFirstName(), user.getLastName());
+    }
 
     @PutMapping("/updateAllAgeByAge")
     public boolean updateAllAgeByAge(@RequestParam int age, @RequestParam int incrementBy) {

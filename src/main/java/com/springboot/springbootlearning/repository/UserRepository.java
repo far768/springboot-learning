@@ -43,13 +43,17 @@ public interface UserRepository extends MongoRepository<User, String> {
 
 //    List<User> updateByLastName(String lastName, User user);
 
+//    @Query("{ 'lastName' : ?0, 'firstName' : ?1 }")
+//    @Update("{ '$set' : object-how?, {$multi : true } }")
 //    List<User> updateByLastNameAndFirstName(String lastName, String firstName, User user);
 
 //    List<User> updateByAge(int age, User user);
 
 //    List<User> updateByContactMobileNumberOrContactEmailId(String mobileNumber, String emailId, User user);
 
-//    List<User> updateFirstNameLastNameById(String id, String firstName, String lastName);
+    @Query("{ 'id' : ?0 }")
+    @Update("{ '$set' : {'firstName' : ?1 , 'lastName' : ?2 } }")
+    void updateFirstNameLastNameById(String id, String firstName, String lastName);
 
     @Query("{ 'age' : ?0 }")
     @Update("{ '$inc' : { 'age' : ?1 } }")
@@ -61,5 +65,6 @@ public interface UserRepository extends MongoRepository<User, String> {
 
     @Aggregation("{ '$project': { '_id' : '$lastName' } }")
     List<String> findAllLastnames();
+
 
 }

@@ -19,6 +19,6 @@ public interface CommonUpdateService<T> {
 
     List<T> updateByContactMobileNumberOrEmailId(String mobileNumber, String emailId, T t);
 
-    List<T> updateFirstNameLastNameById(String id, String firstName, String lastName);
+    boolean updateFirstNameLastNameById(String id, String firstName, String lastName);
 
 }

@@ -166,9 +166,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> updateFirstNameLastNameById(String id, String firstName, String lastName) {
-//        return repository.updateFirstNameLastNameById(id, firstName, lastName);
-        return null;
+    public boolean updateFirstNameLastNameById(String id, String firstName, String lastName) {
+         repository.updateFirstNameLastNameById(id, firstName, lastName);
+        return true;
     }
 
 }
