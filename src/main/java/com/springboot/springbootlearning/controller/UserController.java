@@ -110,6 +110,12 @@ public class UserController {
         return userService.findByContactMobileNumberOrEmailId(mobileNumber, emailId);
     }
 
+    @GetMapping("/findAllLastnames")
+    public List<String> findAllLastnames() {
+        return userService.findAllLastnames();
+    }
+
+
     @PutMapping("/updateAll")
     public List<User> updateAll(@RequestBody List<User> t) {
         return userService.saveAll(t);
@@ -148,5 +154,15 @@ public class UserController {
     @PutMapping("/updateFirstNameLastNameById")
     public List<User> updateFirstNameLastNameById(String id, @RequestBody User user) {
         return userService.updateFirstNameLastNameById(id, user.getFirstName(), user.getLastName());
+    }
+
+    @PutMapping("/updateAllAgeByAge")
+    public boolean updateAllAgeByAge(@RequestParam int age, @RequestParam int incrementBy) {
+        return userService.updateAllAgeByAge(age, incrementBy);
+    }
+
+    @PutMapping("/updateAllCountryBylastName")
+    public boolean updateAllCountryBylastName(@RequestParam String lastName, @RequestParam String country) {
+        return userService.updateAllCountryBylastName(lastName, country);
     }
 }

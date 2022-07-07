@@ -78,6 +78,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<String> findAllLastnames() {
+        return repository.findAllLastnames();
+    }
+
+    @Override
+    public boolean updateAllAgeByAge(int age, int incrementBy) {
+         repository.updateAllAgeByAge(age, incrementBy);
+         return true;
+    }
+
+    @Override
+    public boolean updateAllCountryBylastName(String lastName, String country) {
+        repository.updateAllCountryBylastName(lastName, country);
+        return true;
+    }
+
+    @Override
     public Optional<User> findById(String id) {
         return repository.findById(id);
     }
