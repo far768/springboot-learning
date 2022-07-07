@@ -15,9 +15,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+/*
+The order of the indexed fields has a strong impact on the effectiveness of a particular
+index for a given query. For most compound indexes,
+following the ESR (Equality, Sort, Range) rule helps to create efficient indexes.
+ */
 @CompoundIndexes({
-        @CompoundIndex(def = "{'lastName':1, 'firstName':1}", name = "compound_index_1"),
-        @CompoundIndex(def = "{'contact.mobileNumber':1, 'contact.email':1}", name = "compound_index_2")
+        @CompoundIndex(def = "{'lastName': 1, 'address.city': 1, 'age': 1}", name = "esr-compound-idx")
 })
 public class User extends Person {
     int versionId;
