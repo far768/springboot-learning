@@ -115,46 +115,46 @@ public class UserController {
         return userService.findAllLastnames();
     }
 
-
-    @PutMapping("/updateAll")
-    public List<User> updateAll(@RequestBody List<User> t) {
-        return userService.saveAll(t);
-    }
-
-    @PutMapping("/updateById")
-    public Optional<User> updateById(@RequestBody User user) {
-        return userService.updateById(user);
-    }
-
-    @PutMapping("/updateByFirstName/{firstName}")
-    public List<User> updateByFirstName(@PathVariable String firstName, @RequestBody User user) {
-        return userService.updateByFirstName(firstName, user);
-    }
-
-    @PutMapping("/updateByLastName/{lastName}")
-    public List<User> updateByLastName(@PathVariable String lastName, @RequestBody User user) {
-        return userService.updateByLastName(lastName, user);
-    }
-
-    @PutMapping("/updateByLastNameAndFirstName")
-    public List<User> updateByLastNameAndFirstName(@RequestParam String lastName, @RequestParam String firstName, @RequestBody User user) {
-        return userService.updateByLastNameAndFirstName(lastName, firstName, user);
-    }
-
-    @PutMapping("/updateByAge/{age}")
-    public List<User> updateByAge(@PathVariable int age, @RequestBody User user) {
-        return userService.updateByAge(age, user);
-    }
-
-    @PutMapping("/updateByContactMobileNumberOrEmailId")
-    public List<User> updateByContactMobileNumberOrEmailId(@RequestParam String mobileNumber, @RequestParam String emailId, @RequestBody User user) {
-        return userService.updateByContactMobileNumberOrEmailId(mobileNumber, emailId, user);
-    }
-
-    @PutMapping("/updateFirstNameLastNameById")
-    public List<User> updateFirstNameLastNameById(String id, @RequestBody User user) {
-        return userService.updateFirstNameLastNameById(id, user.getFirstName(), user.getLastName());
-    }
+//
+//    @PutMapping("/updateAll")
+//    public List<User> updateAll(@RequestBody List<User> t) {
+//        return userService.saveAll(t);
+//    }
+//
+//    @PutMapping("/updateById")
+//    public Optional<User> updateById(@RequestBody User user) {
+//        return userService.updateById(user);
+//    }
+//
+//    @PutMapping("/updateByFirstName/{firstName}")
+//    public List<User> updateByFirstName(@PathVariable String firstName, @RequestBody User user) {
+//        return userService.updateByFirstName(firstName, user);
+//    }
+//
+//    @PutMapping("/updateByLastName/{lastName}")
+//    public List<User> updateByLastName(@PathVariable String lastName, @RequestBody User user) {
+//        return userService.updateByLastName(lastName, user);
+//    }
+//
+//    @PutMapping("/updateByLastNameAndFirstName")
+//    public List<User> updateByLastNameAndFirstName(@RequestParam String lastName, @RequestParam String firstName, @RequestBody User user) {
+//        return userService.updateByLastNameAndFirstName(lastName, firstName, user);
+//    }
+//
+//    @PutMapping("/updateByAge/{age}")
+//    public List<User> updateByAge(@PathVariable int age, @RequestBody User user) {
+//        return userService.updateByAge(age, user);
+//    }
+//
+//    @PutMapping("/updateByContactMobileNumberOrEmailId")
+//    public List<User> updateByContactMobileNumberOrEmailId(@RequestParam String mobileNumber, @RequestParam String emailId, @RequestBody User user) {
+//        return userService.updateByContactMobileNumberOrEmailId(mobileNumber, emailId, user);
+//    }
+//
+//    @PutMapping("/updateFirstNameLastNameById")
+//    public List<User> updateFirstNameLastNameById(String id, @RequestBody User user) {
+//        return userService.updateFirstNameLastNameById(id, user.getFirstName(), user.getLastName());
+//    }
 
     @PutMapping("/updateAllAgeByAge")
     public boolean updateAllAgeByAge(@RequestParam int age, @RequestParam int incrementBy) {
