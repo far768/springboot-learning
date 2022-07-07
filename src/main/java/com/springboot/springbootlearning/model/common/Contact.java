@@ -1,17 +1,16 @@
 package com.springboot.springbootlearning.model.common;
 
 
-import lombok.*;
-import org.springframework.data.mongodb.core.index.CompoundIndex;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
-@ToString
 public class Contact {
 
+    @Indexed(unique = true)
     private String mobileNumber;
+    @Indexed(unique = true)
     private String emailId;
 
 

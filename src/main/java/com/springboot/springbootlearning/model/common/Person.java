@@ -11,17 +11,14 @@ import java.time.LocalDateTime;
 
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
-@ToString
 public class Person {
 
     @Id
     private String id;
-    private String firstName;
-    private String lastName;
     @Indexed
+    private String firstName;
+    @Indexed
+    private String lastName;
     private int age;
     @CreatedDate
     private LocalDateTime createdOn;
