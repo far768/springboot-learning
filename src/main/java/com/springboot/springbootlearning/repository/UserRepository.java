@@ -26,7 +26,7 @@ public interface UserRepository extends MongoRepository<User, String> {
 
     Page<User> findAll(Pageable pageable);
 
-    @Query(value = "{ 'firstName' : ?0 }", fields = "{ 'firstName' : 1, 'lastname' : 1}")
+    @Query(value = "{ 'firstName' : ?0 }", fields = "{ 'firstName' : 1, 'lastName' : 1}")
     List<User> findByFirstName(String firstName);
 
     List<User> findByLastName(String lastName);
