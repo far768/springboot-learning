@@ -56,7 +56,7 @@ public interface UserRepository extends MongoRepository<User, String> {
     void updateAllAgeByAge(int age, int incrementBy);
 
     @Query("{ 'lastName' : ?0 }")
-    @Update("{ '$set' : { 'country' : ?1 } }")
+    @Update("{ '$set' : { 'address.country' : ?1 } }")
     void updateAllCountryBylastName(String lastName, String country);
 
     @Aggregation("{ '$project': { '_id' : '$lastName' } }")

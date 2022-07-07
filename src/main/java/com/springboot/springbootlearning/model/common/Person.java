@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
-@CompoundIndex(name = "lname_fname", def = "{'lastName': 1, 'firstName': 1}")
 public class Person {
 
     @Id
