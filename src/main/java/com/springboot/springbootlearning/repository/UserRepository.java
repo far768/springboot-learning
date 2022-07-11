@@ -29,11 +29,11 @@ public interface UserRepository extends MongoRepository<User, String> {
 
 
     @Query("{ 'age' : { $gt: ?0, $lt: ?1 } }")
-    @Update("{ '$addToSet' : {'firstName' : ?2 , 'lastName' : ?3 } }")
+    @Update("{ '$set' : {'firstName' : ?2 , 'lastName' : ?3 } }")
     long findAndModifyFirstNameLastNameByAgeBetween(int from, int to, String firstName, String lastName);
 
     @Query("{ 'role.totalYearOfExperience' : ?0 }")
-    @Update("{ '$inc' : { 'age' : ?1 },  {$multi : true } }")
+    @Update("{ '$inc' : { 'age' : ?1 } }")
     long findAndModifyAgeByTotalYearOfExperience(int totalYearOfExperience, int incrementBy);
 
     @Query("{ 'lastName' : ?0 }")
