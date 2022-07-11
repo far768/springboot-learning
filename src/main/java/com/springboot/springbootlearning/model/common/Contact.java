@@ -2,7 +2,6 @@ package com.springboot.springbootlearning.model.common;
 
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.index.Indexed;
 
 @Data

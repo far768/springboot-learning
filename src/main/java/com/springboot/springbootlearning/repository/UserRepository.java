@@ -1,8 +1,7 @@
 package com.springboot.springbootlearning.repository;
 
 import com.springboot.springbootlearning.model.User;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -13,58 +12,46 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
+    List<User> findByRoleTitleRegex(String titleRegex);
 
-    void deleteByFirstName(String firstName);
+    @Query(fields = "{ 'firstName' : 1, 'lastName' : 1}")
+    List<User> findByRoleTitleIgnoreCase(String firstName);
 
-    void deleteByLastName(String lastName);
+    List<User> findByFirstNameIsLike(String regexp);
 
-    void deleteByLastNameAndFirstName(String lastName, String firstName);
+    List<User> findByActiveIsTrue();
 
-    void deleteByAge(int age);
+    List<User> findByActiveIsFalse();
 
-    void deleteByContactMobileNumberOrContactEmailId(String mobileNumber, String emailId);
+    List<User> findByLastNameAndFirstNameOrContactMobileNumber(String lastName, String firstName, String mobileNumber);
 
-    Page<User> findAll(Pageable pageable);
+    List<User> findByAgeBetween(int from, int to);
 
-    @Query(value = "{ 'firstName' : ?0 }", fields = "{ 'firstName' : 1, 'lastName' : 1}")
-    List<User> findByFirstName(String firstName);
 
-    List<User> findByLastName(String lastName);
+    @Query("{ 'age' : { $gt: ?0, $lt: ?1 } }")
+    @Update("{ '$addToSet' : {'firstName' : ?2 , 'lastName' : ?3 } }")
+    long findAndModifyFirstNameLastNameByAgeBetween(int from, int to, String firstName, String lastName);
 
-    List<User> findByLastNameAndFirstName(String lastName, String firstName);
-
-    List<User> findByAge(int age);
-
-    List<User> findByContactMobileNumberOrContactEmailId(String mobileNumber, String emailId);
-
-//    Optional<User> updateById(User user);
-
-//    List<User> updateByFirstName(String firstName, User user);
-
-//    List<User> updateByLastName(String lastName, User user);
-
-//    @Query("{ 'lastName' : ?0, 'firstName' : ?1 }")
-//    @Update("{ '$set' : object-how?, {$multi : true } }")
-//    List<User> updateByLastNameAndFirstName(String lastName, String firstName, User user);
-
-//    List<User> updateByAge(int age, User user);
-
-//    List<User> updateByContactMobileNumberOrContactEmailId(String mobileNumber, String emailId, User user);
-
-    @Query("{ 'id' : ?0 }")
-    @Update("{ '$set' : {'firstName' : ?1 , 'lastName' : ?2 } }")
-    void updateFirstNameLastNameById(String id, String firstName, String lastName);
-
-    @Query("{ 'age' : ?0 }")
-    @Update("{ '$inc' : { 'age' : ?1 } }")
-    void updateAllAgeByAge(int age, int incrementBy);
+    @Query("{ 'role.totalYearOfExperience' : ?0 }")
+    @Update("{ '$inc' : { 'age' : ?1 },  {$multi : true } }")
+    long findAndModifyAgeByTotalYearOfExperience(int totalYearOfExperience, int incrementBy);
 
     @Query("{ 'lastName' : ?0 }")
     @Update("{ '$set' : { 'address.country' : ?1 } }")
-    void updateAllCountryBylastName(String lastName, String country);
+    long updateAllCountryByLastName(String lastName, String country);
 
-    @Aggregation("{ '$project': { '_id' : '$lastName' } }")
-    List<String> findAllLastnames();
+    @Aggregation(pipeline = {
+            "{'$match':{'address.country':?0, 'role.totalYearOfExperience': {$gt: ?1} }}",
+            "{'$sort':{'age':1}}"
+    })
+    List<User> findByAggregation(String country, int totalExp);
 
+    @Aggregation("{ '$project': { 'lastName': 1, 'firstName': 1, 'age': 1, 'contact.emailId': 1 } }")
+    List<User> checkProjectedValues();
 
+    @Aggregation(pipeline = {"{$project: { month: {$month: $poDate}, year: {$year: $poDate}, amount: 1, poDate: 1 }}"
+            , "{$match: {$and : [{year:?0} , {month:?1}] }}"
+            , "{$group: { '_id': { month: {$month: $poDate}, year: {$year: $poDate} },totalPrice: {$sum: {$toDecimal:$amount}}, }}"
+            , "{$project: { _id: 0, totalPrice: {$toString: $totalPrice} }}"})
+    AggregationResults<User> sumPriceThisYearMonth(Integer year, Integer month);
 }

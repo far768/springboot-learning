@@ -1,10 +1,9 @@
 package com.springboot.springbootlearning.model.common;
 
-import lombok.*;
+import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
 
 import java.time.LocalDateTime;
@@ -24,8 +23,10 @@ public class Person {
     private LocalDateTime createdOn;
     @LastModifiedDate
     private LocalDateTime modifiedOn;
-
+    private boolean active;
     private Contact contact;
     private Address address;
+
+    private Role role;
 
 }
