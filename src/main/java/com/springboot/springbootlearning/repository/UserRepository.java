@@ -54,4 +54,8 @@ public interface UserRepository extends MongoRepository<User, String> {
             , "{$group: { '_id': { month: {$month: $poDate}, year: {$year: $poDate} },totalPrice: {$sum: {$toDecimal:$amount}}, }}"
             , "{$project: { _id: 0, totalPrice: {$toString: $totalPrice} }}"})
     AggregationResults<User> sumPriceThisYearMonth(Integer year, Integer month);
+
+    /**
+     * check upsert/push/addToSet/aggregation pipeline methods and finally indexing
+     */
 }

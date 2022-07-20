@@ -7,7 +7,7 @@ plugins {
 
 group = 'com.springboot'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+sourceCompatibility = '16'
 
 configurations {
 	compileOnly {
@@ -29,7 +29,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.24'
 	annotationProcessor 'org.projectlombok:lombok'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat:2.7.0'
-//	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.0'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.0'
 //	testImplementation 'org.springframework.security:spring-security-test:5.7.1'
 
 }
