@@ -1,18 +1,24 @@
 package com.springboot.springbootlearning.model.common;
 
 
-import lombok.*;
-import org.springframework.data.mongodb.core.index.CompoundIndex;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
-@ToString
 public class Contact {
 
     private String mobileNumber;
     private String emailId;
 
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
 
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
 }
