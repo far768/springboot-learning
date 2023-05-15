@@ -7,7 +7,7 @@ plugins {
 springBoot {
     buildInfo() //fills in build info in /actuator/info endpoint if enabled.
 }
-group = "com.entrust.cps"
+group = "com.myorg.app"
 
 java {
     toolchain {
